@@ -3,71 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>liam dondisch — essays</title>
+<title>Liam Dondisch — Essays</title>
+<meta name="description" content="Essays on psychology and philosophy by Liam Dondisch, arranged as a thematic graph — nodes are essays, edges are shared ideas.">
+<meta name="author" content="Liam Dondisch">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Liam Dondisch — Essays">
+<meta property="og:description" content="Psychology & philosophy, arranged as a thematic graph. Nodes are essays; edges are shared ideas.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0F17'/%3E%3Ccircle cx='22' cy='24' r='6' fill='none' stroke='%235EEAD4' stroke-width='2.5'/%3E%3Ccircle cx='44' cy='40' r='6' fill='none' stroke='%23F4B678' stroke-width='2.5'/%3E%3Cline x1='26.5' y1='28' x2='39.5' y2='36' stroke='%23415066' stroke-width='2'/%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div class="scanline" aria-hidden="true"></div>
+<div class="glow" aria-hidden="true"></div>
+
 <div class="wrap">
 
-  <div class="term">
-    <span class="prompt">liam@dondisch:~$</span> whoami
-    <div class="out">data scientist / psych &amp; philosophy, occasionally both at once</div>
-  </div>
-  <div class="term">
-    <span class="prompt">liam@dondisch:~$</span> cat manifest.json<span class="cursor"></span>
-  </div>
+  <!-- ─── terminal boot / hero ─── -->
+  <section class="hero">
+    <div class="boot" id="boot" aria-hidden="true"></div>
+    <h1 class="title">essays<span class="title-dot">.</span></h1>
+    <p class="tagline">
+      Psychology &amp; philosophy — arranged as a graph, not a list.
+      Each essay is a node; edges are shared ideas, not chronology.
+    </p>
+    <div class="hero-meta" id="heroMeta"></div>
 
-  <header>
-    <h1>essays</h1>
-    <div class="h1-sub">a graph, not a list. essays are nodes; edges are shared theme, not chronology.</div>
-  </header>
+    <div class="oracle" id="oracle" aria-hidden="true">
+      <div class="oracle-head"><span class="p">liam@dondisch ~ %</span> ./consult --philosophers</div>
+      <div class="oracle-name" id="oracleName"><span class="ocursor">▮</span></div>
+      <blockquote class="oracle-quote" id="oracleQuote"></blockquote>
+      <div class="oracle-work" id="oracleWork"></div>
+    </div>
+  </section>
 
-  <div class="breadcrumb" id="breadcrumb">
-    <span class="back" id="backBtn">cd ..</span>
+  <!-- ─── breadcrumb (reader only) ─── -->
+  <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb">
+    <button class="back" id="backBtn">← back to graph</button>
     <span class="path" id="crumbPath"></span>
-  </div>
+  </nav>
 
-  <div class="collapsible" id="statsRow">
-    <div class="stats-row" id="statsRowInner"></div>
-  </div>
-
-  <div class="collapsible" id="graphPanelWrap">
-    <div class="graph-panel">
-      <div class="graph-label">// thematic graph — drag or tap a node</div>
-      <div class="graph-hint">force-directed</div>
-      <svg id="graph"></svg>
+  <!-- ─── graph explorer ─── -->
+  <div class="collapsible" id="explorer">
+    <div class="panel graph-panel">
+      <div class="panel-head">
+        <span class="panel-label">thematic graph</span>
+        <span class="panel-hint" id="graphHint">drag a node · click to inspect</span>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="graph-stage">
+        <svg id="graph" role="img" aria-label="Force-directed graph of essays connected by shared themes"></svg>
+      </div>
     </div>
+
+    <aside class="panel readout" id="readout">
+      <div class="empty" id="readoutEmpty">
+        <span class="blink">▮</span> select a node to inspect it — click again, or hit <kbd>open</kbd>, to read.
+      </div>
+      <div class="readout-body" id="readoutBody" hidden></div>
+    </aside>
   </div>
 
-  <div class="collapsible" id="readoutWrap">
-    <div class="readout" id="readout">
-      <div class="empty">// click a node above to load its diagnostic readout, click again to read</div>
-    </div>
-  </div>
-
-  <div class="reader" id="reader">
+  <!-- ─── reader ─── -->
+  <article class="reader" id="reader" aria-hidden="true">
+    <div class="progress" id="progress"><span id="progressBar"></span></div>
     <div class="reader-window">
       <div class="reader-bar">
-        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-        <span class="fname" id="readerFname">cat case.txt</span>
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="fname" id="readerFname">case.txt</span>
       </div>
       <div class="reader-body">
-        <div class="reader-cmd" id="readerCmd">liam@dondisch:~$ cat case.txt</div>
-        <div class="reader-title" id="readerTitle"></div>
-        <div class="reader-sub" id="readerSub"></div>
-        <div class="reader-byline" id="readerByline"></div>
-        <div id="readerParas"></div>
-        <div class="reader-source" id="readerSource"></div>
-        <div class="reader-eof">-- EOF --</div>
+        <p class="reader-cmd" id="readerCmd"></p>
+        <span class="reader-tag" id="readerTag"></span>
+        <h2 class="reader-title" id="readerTitle"></h2>
+        <p class="reader-sub" id="readerSub"></p>
+        <p class="reader-byline" id="readerByline"></p>
+        <div class="reader-paras" id="readerParas"></div>
+        <p class="reader-source" id="readerSource"></p>
+        <div class="reader-related" id="readerRelated"></div>
+        <p class="reader-eof">— end of file —</p>
       </div>
     </div>
-  </div>
+  </article>
 
   <footer>
-    liam@dondisch:~$ echo "more cases pending" &nbsp;·&nbsp; built, not templated
+    <span>liam@dondisch <span class="muted">~ %</span> echo "more cases pending"</span>
+    <span class="muted">built by hand, not templated</span>
   </footer>
 
 </div>
