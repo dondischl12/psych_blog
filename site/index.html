@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>liam dondisch — essays</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="term">
+    <span class="prompt">liam@dondisch:~$</span> whoami
+    <div class="out">data scientist / psych &amp; philosophy, occasionally both at once</div>
+  </div>
+  <div class="term">
+    <span class="prompt">liam@dondisch:~$</span> cat manifest.json<span class="cursor"></span>
+  </div>
+
+  <header>
+    <h1>essays</h1>
+    <div class="h1-sub">a graph, not a list. essays are nodes; edges are shared theme, not chronology.</div>
+  </header>
+
+  <div class="breadcrumb" id="breadcrumb">
+    <span class="back" id="backBtn">cd ..</span>
+    <span class="path" id="crumbPath"></span>
+  </div>
+
+  <div class="collapsible" id="statsRow">
+    <div class="stats-row" id="statsRowInner"></div>
+  </div>
+
+  <div class="collapsible" id="graphPanelWrap">
+    <div class="graph-panel">
+      <div class="graph-label">// thematic graph — drag or tap a node</div>
+      <div class="graph-hint">force-directed</div>
+      <svg id="graph"></svg>
+    </div>
+  </div>
+
+  <div class="collapsible" id="readoutWrap">
+    <div class="readout" id="readout">
+      <div class="empty">// click a node above to load its diagnostic readout, click again to read</div>
+    </div>
+  </div>
+
+  <div class="reader" id="reader">
+    <div class="reader-window">
+      <div class="reader-bar">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <span class="fname" id="readerFname">cat case.txt</span>
+      </div>
+      <div class="reader-body">
+        <div class="reader-cmd" id="readerCmd">liam@dondisch:~$ cat case.txt</div>
+        <div class="reader-title" id="readerTitle"></div>
+        <div class="reader-sub" id="readerSub"></div>
+        <div class="reader-byline" id="readerByline"></div>
+        <div id="readerParas"></div>
+        <div class="reader-source" id="readerSource"></div>
+        <div class="reader-eof">-- EOF --</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    liam@dondisch:~$ echo "more cases pending" &nbsp;·&nbsp; built, not templated
+  </footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
