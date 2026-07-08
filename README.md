@@ -5,11 +5,7 @@ as an interactive knowledge graph rather than a chronological blog. Each essay
 is a node; edges connect essays that share ideas. Click a node to inspect it,
 click again to read it in a focused, typographic reader.
 
-**Live site:** _enable GitHub Pages (see [Deployment](#deployment)) and it publishes to_
-`https://<username>.github.io/<repo>/`
-
-<!-- Replace the line above with your real URL once Pages is live, e.g.:
-     Live site: https://dondischl12.github.io/psych_blog/ -->
+**Live site:** <https://dondischl12.github.io/psych_blog/>
 
 ---
 
